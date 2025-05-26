@@ -14,11 +14,10 @@ export default function Card({ title, description, image, link }) {
         <h3 className="text-xl font-bold text-white mb-4">{title}</h3>
         <p className="text-white m-2">{description}</p>
         {link && (
-          <Link href={link} className="inline-block m-6 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition">
-            
-              See more →
-            
-          </Link>
+          <a href={link} target="_blank" rel="noopener noreferrer" className="inline-block m-6 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition">
+             See more →
+           </a>
+
         )}
       </div>
     </div>
