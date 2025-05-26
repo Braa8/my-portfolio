@@ -7,11 +7,13 @@ import Footer from "./components/Footer";
 
 export default function Home() {
   function scroll () {
+    if (typeof window !== 'undefined'){
   const getDown = document.getElementById('bottom');
-  if (getDown) {
-    getDown.scrollIntoView({
+    if (getDown) {
+      getDown.scrollIntoView({
       behavior:'smooth'
-    });
+      });
+    }
   }
 };
   return (
