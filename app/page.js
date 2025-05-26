@@ -1,14 +1,12 @@
-'use client'
+'use client';
 import dynamic from 'next/dynamic';
 import Navbar from "./components/Navbar";
 import Image from "next/image";
 import { motion } from 'framer-motion';
 import Footer from "./components/Footer";
 
-// استيراد LottieAnimation بشكل ديناميكي مع تعطيل SSR
-const LottieAnimation = dynamic(() => import('./components/HomeLottie'), {
-  ssr: false,
-});
+
+const LottieAnimation = dynamic(() => import("./components/HomeLottie"), { ssr: false });
 
 export default function Home() {
   function scrollToBottom() {

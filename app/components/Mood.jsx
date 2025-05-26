@@ -3,7 +3,6 @@ import Image from "next/image";
 export default function Mood (){
 
     function toggleDarkMode() {
-  if (typeof window !== 'undefined') {
     const html = document.documentElement;
     const isDark = html.classList.toggle('dark');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
@@ -15,7 +14,7 @@ export default function Mood (){
     } else {
       html.classList.remove('dark');
     }
-  }
+  
 }
 
       

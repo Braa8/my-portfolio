@@ -1,27 +1,25 @@
-'use client';
+// components/AnimatedLogo.jsx
+"use client";
 
-import React from 'react';
-import dynamic from 'next/dynamic';
-
-// استيراد Lottie بطريقة ديناميكية مع تعطيل SSR
-const Lottie = dynamic(() => import('react-lottie'), { ssr: false });
-
-// استيراد ملف الـ JSON (تأكد أنه في نفس المجلد)
-import animationData from './animation.json';
+import { useEffect, useState } from "react";
+import Lottie from "lottie-react";
 
 export default function LottieAnimation() {
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: animationData,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
-    },
-  };
+  const [animationData, setAnimationData] = useState(null);
+
+  useEffect(() => {
+    fetch("/animation.json")
+      .then((res) => res.json())
+      .then((data) => setAnimationData(data));
+  }, []);
+
+  if (!animationData) return null;
 
   return (
-    <div className="mr-40">
-      <Lottie options={defaultOptions} height={400} width={400} />
-    </div>
+    <Lottie className="mr-40"
+      animationData={animationData}
+      loop={true}
+      style={{ width: 700, height: 500 }}
+    />
   );
 }
