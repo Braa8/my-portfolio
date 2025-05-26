@@ -1,28 +1,27 @@
-'use client'
-import React, { useEffect, useRef } from 'react';
-import lottie from 'lottie-web';
+'use client';
 
-const LottieAnimation = () => {
-  const container = useRef(null);
+import React from 'react';
+import dynamic from 'next/dynamic';
 
-  useEffect(() => {
-    // تحميل الأنيميشن فقط على المتصفح
-    if (typeof window !== 'undefined') {
-      const anim = lottie.loadAnimation({
-        container: container.current,
-        renderer: 'svg',
-        loop: true,
-        autoplay: true,
-        path: '/animation.json', // تأكد من وجود هذا الملف في public
-      });
+// استيراد Lottie بطريقة ديناميكية مع تعطيل SSR
+const Lottie = dynamic(() => import('react-lottie'), { ssr: false });
 
-      return () => anim.destroy();
-    }
-  }, []);
+// استيراد ملف الـ JSON (تأكد أنه في نفس المجلد)
+import animationData from './animation.json';
+
+export default function LottieAnimation() {
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  };
 
   return (
-    <div className="mr-40" ref={container} style={{ width: 400, height: 400 }} />
+    <div className="mr-40">
+      <Lottie options={defaultOptions} height={400} width={400} />
+    </div>
   );
-};
-
-export default LottieAnimation;
+}
