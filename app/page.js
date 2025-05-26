@@ -6,14 +6,16 @@ import { motion } from 'framer-motion';
 import Footer from "./components/Footer";
 
 export default function Home() {
-  function scroll () {
-    if (typeof window !== 'undefined'){
-  const getDown = document.getElementById('bottom');
-    if (getDown) {
-      getDown.scrollIntoView({
-      behavior:'smooth'
-      });
-    }
+  function scrollToBottom() {
+  // هذا الشرط سيمنع أي خطأ أثناء SSR
+  if (typeof window !== 'undefined') {
+    // انتظر بعد تحميل الصفحة بالكامل
+    setTimeout(() => {
+      const getDown = document.getElementById('bottom');
+      if (getDown) {
+        getDown.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 0);
   }
 };
   return (
