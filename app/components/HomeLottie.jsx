@@ -1,18 +1,27 @@
 'use client'
-import React from 'react';
-import Lottie from 'react-lottie';
+import React, { useEffect, useRef } from 'react';
+import lottie from 'lottie-web';
 
 const LottieAnimation = () => {
-  const defaultOptions = {
-    loop: true,  
-    autoplay: true, 
-    path: '/animation.json',  
-  };
+  const container = useRef(null);
+
+  useEffect(() => {
+    // تحميل الأنيميشن فقط على المتصفح
+    if (typeof window !== 'undefined') {
+      const anim = lottie.loadAnimation({
+        container: container.current,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: '/animation.json', // تأكد من وجود هذا الملف في public
+      });
+
+      return () => anim.destroy();
+    }
+  }, []);
 
   return (
-    <div className='mr-40 '>
-      <Lottie options={defaultOptions} height={400} width={400} />
-    </div>
+    <div className="mr-40" ref={container} style={{ width: 400, height: 400 }} />
   );
 };
 
