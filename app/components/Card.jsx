@@ -1,5 +1,4 @@
-import Link from 'next/link';
-
+'use client'
 export default function Card({ title, description, image, link }) {
   return (
     <div className=" shadow-lg rounded-2xl overflow-hidden max-w-sm w-full m-4 transition hover:scale-110 hover:cursor-pointer duration-300">
